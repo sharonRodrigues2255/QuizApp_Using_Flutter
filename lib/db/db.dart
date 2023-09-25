@@ -1,7 +1,5 @@
-import 'package:quiz/quizpage.dart';
-
 class Questions {
-  static const questionList = [
+  static const List<Map<String, dynamic>> questionList = [
     {
       "question": "What is the capital of France?",
       "options": ["Paris", "London", "Berlin", "Madrid"],

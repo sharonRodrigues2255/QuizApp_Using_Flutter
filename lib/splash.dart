@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:quiz/db/db.dart';
 import 'package:quiz/quizpage.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -13,10 +12,8 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 4)).then((value) => Navigator.of(context)
-        .pushReplacement(MaterialPageRoute(
-            builder: (context) => Quizpage()
-              
+    Future.delayed(Duration(seconds: 2)).then((value) => Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (context) => Quizpage())));
     super.initState();
   }
 
