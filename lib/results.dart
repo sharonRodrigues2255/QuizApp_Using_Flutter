@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:quiz/quizpage.dart';
 
@@ -9,34 +10,58 @@ class Results extends StatelessWidget {
   Widget build(BuildContext context) {
     print(points);
     return Scaffold(
-      appBar: AppBar(title: Text("Results")),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-              child: CircularPercentIndicator(
-            animation: true,
-            radius: 60,
-            percent: points / 10,
-            progressColor: points > 5 && points < 8
-                ? Colors.blue
-                : points < 5
-                    ? Colors.red
-                    : Colors.amber,
-            widgetIndicator: Text("${points * 10}"),
-            center: Text(
-              "${points * 10}",
-              style: TextStyle(
-                  fontSize: 30, fontWeight: FontWeight.bold, color: Colors.red),
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: Text(
+          "Results",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.black,
+      ),
+      body: Center(
+        child: Stack(
+          children: [
+            Align(
+                alignment: Alignment.center,
+                child: Lottie.asset("assets/animation_lmzamajl.json",
+                    fit: BoxFit.fill)),
+            Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                      child: CircularPercentIndicator(
+                    animation: true,
+                    radius: 60,
+                    percent: points / 10,
+                    progressColor: points > 5 && points < 8
+                        ? Colors.blue
+                        : points < 5
+                            ? Colors.red
+                            : Colors.amber,
+                    widgetIndicator: Text("${points * 10}"),
+                    center: Text(
+                      "$points/10",
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red),
+                    ),
+                  )),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => Quizpage()));
+                      },
+                      child: points < 5 ? Text("Try Again") : Text("Good Job")),
+                ],
+              ),
             ),
-          )),
-          ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => Quizpage()));
-              },
-              child: points < 5 ? Text("Try Again") : Text("Good Job"))
-        ],
+          ],
+        ),
       ),
     );
   }
