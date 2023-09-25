@@ -17,6 +17,7 @@ class _QuizpageState extends State<Quizpage> {
   late bool isCorrect;
   int? correctIndex;
   int? selectedIndex;
+  int score = 0;
 
   checkAnswer(int index) {
     List optionslist = data[questionindex]["options"];
@@ -32,6 +33,7 @@ class _QuizpageState extends State<Quizpage> {
     if (correctIndex == index) {
       setState(() {
         isCorrect = true;
+        score += 1;
       });
     } else {
       setState(() {
@@ -39,6 +41,19 @@ class _QuizpageState extends State<Quizpage> {
       });
     }
     print(isCorrect);
+  }
+
+  nextQustion() {
+    if (questionindex < data.length - 1) {
+      setState(() {
+        questionindex += 1;
+        selectedIndex = null;
+        correctIndex = null;
+      });
+    } else if (questionindex == data.length - 1) {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => Results(points: score)));
+    }
   }
 
   @override
@@ -54,7 +69,11 @@ class _QuizpageState extends State<Quizpage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             SizedBox(
-                height: 30, child: Text("Question no ${questionindex + 1}/10")),
+                height: 30,
+                child: Text(
+                  "Question no ${questionindex + 1}/10",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                )),
             Container(
               height: 150,
               width: double.infinity,
@@ -84,6 +103,10 @@ class _QuizpageState extends State<Quizpage> {
                           checkAnswer(index);
                           setState(() {
                             selectedIndex = index;
+                          });
+                          Future.delayed(Duration(seconds: 1)).then((value) {
+                            nextQustion();
+                            print(score);
                           });
                         },
                         child: Container(
@@ -125,15 +148,8 @@ class _QuizpageState extends State<Quizpage> {
                           )),
             ElevatedButton(
                 onPressed: () {
-                  if (questionindex < data.length - 1) {
-                    setState(() {
-                      questionindex += 1;
-                      selectedIndex = null;
-                      correctIndex = null;
-                    });
-                  } else if (questionindex == data.length - 1) {
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => Results()));
+                  if (selectedIndex != null) {
+                    nextQustion();
                   }
                 },
                 child: Container(
@@ -142,7 +158,9 @@ class _QuizpageState extends State<Quizpage> {
                     width: double.infinity,
                     child: questionindex == data.length - 1
                         ? Center(child: Text("see Results"))
-                        : Center(child: Text("Next"))))
+                        : selectedIndex == null
+                            ? Center(child: Text("Select an option"))
+                            : Center(child: Text("Next"))))
           ],
         ),
       ),
