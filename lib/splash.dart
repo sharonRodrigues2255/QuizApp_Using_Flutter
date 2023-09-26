@@ -12,7 +12,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future.delayed(Duration(seconds: 2)).then((value) => Navigator.of(context)
+    Future.delayed(Duration(seconds: 4)).then((value) => Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: (context) => Quizpage())));
     super.initState();
   }
@@ -21,16 +21,30 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            height: 300,
-            width: 300,
-            child: Lottie.asset("assets/Animation - 1695630670813.json",
-                fit: BoxFit.cover),
-          ),
-        ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Stack(
+              children: [
+                Container(
+                  height: 400,
+                  width: 400,
+                  child:
+                      Lottie.asset("assets/gUHKDdNBNk.json", fit: BoxFit.cover),
+                ),
+                Positioned(
+                  top: MediaQuery.of(context).size.height / 4 - 20,
+                  left: MediaQuery.of(context).size.width / 4,
+                  child: Text(
+                    "Quiz Time",
+                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.w900),
+                  ),
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

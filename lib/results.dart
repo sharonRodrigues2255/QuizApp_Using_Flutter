@@ -34,11 +34,8 @@ class Results extends StatelessWidget {
                     animation: true,
                     radius: 60,
                     percent: points / 10,
-                    progressColor: points > 5 && points < 8
-                        ? Colors.blue
-                        : points < 5
-                            ? Colors.red
-                            : Colors.amber,
+                    backgroundColor: Colors.brown,
+                    progressColor: points < 5 ? Colors.blue : Colors.amber,
                     widgetIndicator: Text("${points * 10}"),
                     center: Text(
                       "$points/10",

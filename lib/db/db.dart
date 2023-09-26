@@ -1,9 +1,9 @@
 class Questions {
   static const List<Map<String, dynamic>> questionList = [
     {
-      "question": "What is the capital of France?",
-      "options": ["Paris", "London", "Berlin", "Madrid"],
-      "correct": "Paris"
+      "question": "Kya chahiye tere ko?",
+      "options": ["KGF", "Dhuniya", "Bombay", "India"],
+      "correct": "Dhuniya"
     },
     {
       "question": "Who wrote the play 'Romeo and Juliet'?",
