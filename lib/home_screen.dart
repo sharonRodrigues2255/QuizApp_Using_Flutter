@@ -22,6 +22,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Select a category"),
+        backgroundColor: Colors.grey,
       ),
       backgroundColor: Colors.black,
       body: Center(
