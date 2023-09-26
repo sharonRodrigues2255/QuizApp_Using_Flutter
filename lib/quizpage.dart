@@ -14,7 +14,7 @@ class Quizpage extends StatefulWidget {
 }
 
 class _QuizpageState extends State<Quizpage> {
-  final data = Questions.questionList;
+  final data = Questions.quizedList[Questions.quizlistIndex];
   int questionindex = 0;
   late bool isCorrect;
   int? correctIndex;
@@ -91,7 +91,7 @@ class _QuizpageState extends State<Quizpage> {
                             color: Colors.white),
                       )),
                   Container(
-                    height: 150,
+                    height: 200,
                     width: double.infinity,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -100,11 +100,11 @@ class _QuizpageState extends State<Quizpage> {
                         child: Text(
                       data[questionindex]["question"],
                       style:
-                          TextStyle(fontWeight: FontWeight.w900, fontSize: 25),
+                          TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
                     )),
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 10,
                   ),
                   Expanded(
                     child: ListView.builder(
@@ -138,15 +138,21 @@ class _QuizpageState extends State<Quizpage> {
                                   height: 50,
                                   width: double.infinity,
                                   child: Center(
-                                      child: Text(
-                                    optionslist[index],
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.white),
+                                      child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      optionslist[index],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.white),
+                                    ),
                                   ))),
                             ),
                           );
                         }),
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   Center(
                       child: selectedIndex == null
@@ -155,7 +161,6 @@ class _QuizpageState extends State<Quizpage> {
                                   controller: controller,
                                   onComplete: () {
                                     nextQustion();
-                                    controller.isRestarted;
                                   },
                                   textStyle: TextStyle(
                                       color: Colors.white, fontSize: 30),
@@ -184,7 +189,7 @@ class _QuizpageState extends State<Quizpage> {
                     height: 10,
                   ),
                   Container(
-                      color: Colors.yellow,
+                      color: Colors.grey,
                       height: 50,
                       width: double.infinity,
                       child: selectedIndex == null
@@ -193,12 +198,12 @@ class _QuizpageState extends State<Quizpage> {
                 ],
               ),
             ),
-            Align(
-              alignment: Alignment.center,
-              child: selectedIndex != null && selectedIndex == correctIndex
-                  ? Lottie.asset("assets/animation_lmz89jd8.json")
-                  : SizedBox(),
-            )
+            // Align(
+            //   alignment: Alignment.center,
+            //   child: selectedIndex != null && selectedIndex == correctIndex
+            //       ? Lottie.asset("assets/animation_lmz89jd8.json")
+            //       : SizedBox(),
+            // )
           ],
         ),
       ),
